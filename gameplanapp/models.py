@@ -62,8 +62,7 @@ class Event(models.Model):
     event_location = models.CharField(max_length=200)
     event_details = models.TextField()
     event_date = models.DateField(null=True, blank=True)
-    event_manager = models.OneToOneField(
-        "GamePlanUser", on_delete=models.CASCADE, related_name='manager')
+    event_manager = models.ForeignKey('GamePlanUser',on_delete=models.CASCADE)
     event_game = models.OneToOneField(Game, on_delete=models.SET_NULL, null=True)
     event_status = models.CharField(max_length=200, default='ACTIVE')
 

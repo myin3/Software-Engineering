@@ -24,7 +24,7 @@ class SignUpForm(UserCreationForm):
 
 class EventForm(ModelForm):
     """Form to allow users to create an event"""
-
+    event_date = forms.DateField()
     class Meta:
         model = Event
         fields = ('event_title', 'event_location', 'event_details', 'event_date', 'event_game')
