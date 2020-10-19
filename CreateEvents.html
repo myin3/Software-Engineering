@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> GamePlan </title>
+    <meta charaset="utf-8">
+    <meta name="viewport" content="width=device-wdith, intial-scale=1">
+
+
+<!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <style>
+    body{
+      background-color: darkgray;
+    }
+    .affix {
+      top: 0;
+      width: 100%;
+      z-index: 9999 !important;
+    }
+  
+    .affix + .container-fluid {
+      padding-top: 70px;
+    }
+    .navbar {
+      overflow: hidden;
+      background-color: black;
+      font-family: Arial;
+    }
+    .navbar a {
+      float: left;
+      font-size: 16px;
+      color: white;
+      text-align: center;
+      padding: 0px 15px;
+      text-decoration: none;
+      width: 100%;
+    }
+    .navbar a:hover{
+      background-color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="jumbotron text-center bg-dark text-white" style="margin-bottom:0">
+    <a class="text-center text-white bg-dark"src="logo.png" href="Home_Page.html"><h1>GamePlan</h1></a>
+    <p>Team 8</p> 
+  </div>
+
+  <nav class="navbar navbar-inverse navbar-dark" data-spy="affix" data-offset-top="197">
+    <div class="container-fluid">
+
+        <ul class="nav navbar-toggle">
+            <li class="active"><a class="active" href="Home_Page.html"><h3>Home</h3></a></li>
+            <li class="active"><a class="active" href="CreateEvents.html"><h3>Events</h3></a></li>
+
+        </ul>
+      <div class="navbar navbar-inverse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a class="active" href="login.html"><h3>Login</h3></a></li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <h1 class="text-center">Create Event</h1>
+    <div class="row">
+      <div class="col-lg-4">
+        <!-- Spacing-->
+      </div>
+      <div class="col-lg-4">
+        <form method="post">
+          <div class='form-inline' style="padding:10px" style="align-self:center">
+            <label for="First_Name" style="padding:10px" style="align-self:center">First Name: </label>
+              <input type="text" placeholder="First Name" class='form-inline' name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="255" required id="id_username">
+              <label for="Last_Name" style="padding:10px" style="align-self:center">Last Name:</label>
+              <input type="text" placeholder="Last Name" class='form-inline' name="password" autocomplete="current-password" required id="id_password">
+          </div>
+          <div class='form-group' style="padding:10px">
+            <label for="Email">Email:</label>
+            <input type="email" placeholder="Example@email.com" class='form-control' name="email" autocomplete="current-email" required id="id_email">
+          </div>
+          <div class='form-group' style="padding:10px">
+            <label for="event_id">Event Name:</label>
+            <input type="text" placeholder="Event Name" class='form-control' name="eventname" autofocus autocapitalize="none" autocomplete="eventname" maxlength="255" required id="id_eventname">
+            <label for="event_location">Event Location:</label>
+            <input type="text" placeholder="Location" class='form-control' name="eventlocation" autocomplete="current-eventlocation" required id="id_eventlocation">
+            <label for="Event Games">Event Game:</label>
+            <input type="text" placeholder="Event Game" class='form-control' name="eventGame" autocomplete="current-eventGame" required id="id_eventGame">
+          </div>
+          <div class='form-inline'>
+            <label for="startdate" style='padding:10px'>Start Date:</label>
+            <input type="date" class='form-control' name="startdate" autocomplete="current-startdate" required id="startdate">
+            <label for="endDate" style='padding:10px'>End Date:</label>
+            <input type="date" class='form-control' name="startdate" autocomplete="current-startdate" required id="startdate">
+          </div>
+          <input type="submit" class='btn btn-primary btn-block btn-lg' name="createEvent" value="Create Event" style="padding-top:10px">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+  <div class="col-lg-9">
+
+  </div>
+<div class="col-lg-12">
+
+</div>
+</body>
+</html>
