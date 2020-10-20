@@ -6,6 +6,7 @@ Project Title - GamePlan
 Team Members - Matthew Yin, Soojie Chin, Amber Pradhan, Raghuveer Gummadi
 
 Implementation
+
 Go to the linked Github https://github.com/myin3/Software-Engineering and clone the repository
 
 Make sure the following python packages are installed. We recommend using a virtual environment:
