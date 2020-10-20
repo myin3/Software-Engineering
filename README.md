@@ -25,7 +25,7 @@ For windows systems, you’ll need to compile mysqlclient from source, which is 
 Navigate to the directory containing manage.py and input the following command in the command line: 
 
 ```
-pip3 install <filename for the wheel file you downloaded
+pip3 install <filename for the wheel file you downloaded>
 
 ```
 
