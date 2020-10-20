@@ -12,9 +12,9 @@ Go to the linked Github https://github.com/myin3/Software-Engineering and clone 
 Make sure the following python packages are installed. We recommend using a virtual environment:
 
 ```
-pip install django
-pip install django-crispy-forms
-pip install mysqlclient
+pip3 install django
+pip3 install django-crispy-forms
+pip3 install mysqlclient
 ```
 	
 NOTE: You must have MySQL already installed on your system. before you can install the python package mysqlclient. See https://pypi.org/project/mysqlclient/ . 
