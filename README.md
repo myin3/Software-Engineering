@@ -17,7 +17,10 @@ pip install django-crispy-forms
 pip install mysqlclient
 ```
 	
-NOTE: mysqlclient will require additional software before you can add the package. It is recommended you already have MySQL server installed before installing mysqlclient. See https://pypi.org/project/mysqlclient/ 
+NOTE: You must have MySQL already installed on your system. before you can install the python package mysqlclient. See https://pypi.org/project/mysqlclient/ . 
+
+MySQL can be installed here: https://dev.mysql.com/downloads/installer/
+	
 For windows systems, you’ll need to compile mysqlclient from source, which is hard. Instead, it is easier to download a third party python wheel file for mysqlclient, and then move it to the project folder. (The same folder where the manage.py file is located). Download the latest mysqlclient wheel file from this site https://www.lfd.uci.edu/~gohlke/pythonlibs/ and move the .whl file into the project folder.
 Navigate to the directory containing manage.py and input the following command in the command line: 
 
