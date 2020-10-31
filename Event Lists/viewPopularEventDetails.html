@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <button class="btn" btn-primary>
+        <input type="date" name="" id="input" class="form-control" value="" required="required" title="">
+        </button> -->
+	<title>NavbarPractice</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+   
+	<style>
+
+        body{
+            background: whitesmoke;
+        }
+        .container 
+        {
+            margin-top: 50px;
+            background: white;
+        }
+        main 
+        {
+            margin: 20px;
+            padding: 20px;
+            width: 100%;
+            height: 400px;
+        }
+
+        .eventImg 
+        {
+            height: 200px;
+            width: 100%;
+        }
+        
+    button 
+    {
+        padding: 15px;
+        margin: 30px 0;
+        background-color: black;
+        border: 1px solid white;
+        color: white;
+        transition: all 0.5s ease;
+    }
+    button:hover 
+    {
+        transition: all o.5s ease;
+        border: 1px solid blue;
+        box-shadow: 0 0 15px 5px rgba(40,170,200,1);
+    }
+
+    .backBtn a 
+    {
+        text-decoration: none;
+    }
+
+	</style>
+</head>
+<body>
+
+    <!-- Event Details -->
+    <section class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>Title : </h3>
+                    <h3>Location: </h3>
+                    <h3>Start Date: </h3>
+                    <h3>End Date: </h3>
+                    <h3>Organizor: </h3>
+                    <h3>Event Description: </h3> 
+                    <h4>No of Members Attending: </h4>
+
+                </div>
+                <div class="col-lg-5">
+                    <img src="images/event.png" alt="" class="eventImg">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-10 col-sm-10 col-md-10">
+                    <button class="btn btn-dark text-warning">Join</button>
+                    <a href="popularEventList.html" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Back To Event List</button></a>
+                </div>
+
+            </div>
+    
+        </section>
+
+        <!-- Event Details End -->
+    
+ 
+	
+
+</body>
+</html>
