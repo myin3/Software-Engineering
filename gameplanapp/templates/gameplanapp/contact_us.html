@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> GamePlan </title>
+    <meta charaset="utf-8">
+    <meta name="viewport" content="width=device-wdith, intial-scale=1">
+
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: darkgray;
+        }
+
+        .affix {
+            top: 0;
+            width: 100%;
+            z-index: 9999 !important;
+        }
+
+        .affix+.container-fluid {
+            padding-top: 70px;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: black;
+            font-family: Arial;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 0px 15px;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .navbar a:hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center bg-dark text-white" style="margin-bottom:0">
+        <a class="text-center text-white bg-dark" src="logo.png" href="Home_Page.html">
+            <h1>GamePlan</h1>
+        </a>
+        <p>Team 8</p>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-dark" data-spy="affix" data-offset-top="197">
+        <div class="container-fluid">
+
+            <ul class="nav navbar-toggle">
+                <li class="active"><a class="active" href="{% url 'index' %}">
+                        <h3>Home</h3>
+                    </a></li>
+                <li class="active"><a class="active" href="{% url 'create_event' %}">
+                        <h3>Events</h3>
+                    </a></li>
+                <li class="active"><a class="active" href="{% url 'contact_us' %}">
+                        <h3>Contact Us</h3>
+                    </a></li>
+            </ul>
+            <div class="navbar navbar-inverse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="active" href="{% url 'friends' %">
+                        <h3>Friends</h3>
+                    </a>
+                    <li class="active"><a class="active" href="{% url 'profile' %">
+                        <h3>Profile</h3>
+                    </a>
+
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="active"><a class="active" href="{% url 'logout' %}">
+                            <h3>Logout</h3>
+                        </a></li>
+                    {% else %}
+                    <li class="active"><a class="active" href="{% url 'login' %}">
+                            <h3>Login</h3>
+                        </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <h1 style="text-align: center;">About Us</h1>
+        <div class="row">
+            <div class="col-md-1">
+                <!-- Spacing -->
+            </div>
+            <div class="col-lg-2">
+                <h2>Matthew Yin</h2>
+                <p>Description:</p>
+                <p>I am a Senior Georgia State student pursuing a Bachelor’s degree in Computer Science. 
+                    Languages that I know are Python, HTML, CSS, C, and Java. 
+                    I have also received work experience as a tester at ADVA. 
+                    I had the opportunity to debug and create automation test suites for optical applications. 
+                    In order to auto generate the test suites, I created a python file that takes input from an excel sheet and prints to a file the test code.</p>
+            </div>
+            <div class="col-lg-2">
+                <h2>Soojie Chin</h2>
+                <p>Description:</p>
+                <p>Pursuing Bachelors in CS, concentrating on Cyber Security
+                    Languages: Java, JavaScript, brief understanding of Python, C#
+                    Seeking work experience to build skills and gain proficiency 
+                    </p>
+            </div>
+            <div class="col-lg-2">
+                <h2>Amber Pradhan</h2>
+                <p>Description:</p>
+                <p>Majoring in Computer Science: concentrating on Software engineering
+                    Languages: Java, Sql, Html & Css, adapting-JavaScript
+                    Projects Experienced: Billing Software for the Owners and Employees, Mini-Projects such as Notepad-Editor, Car-Racing using Applets, Tik-Tok
+                    Looking for an opportunity where I can be creative,learn and contribute to the project.
+                   </p>
+            </div>
+            <div class="col-lg-2">
+                <h2>Raghuveer Gummadi</h2>
+                <p>Description:</p>
+                <p>BsC in Mathematics and a minor in CS from Kennesaw State University,
+                    current Masters student in CS at GSU
+                    Languages: Python, familiar with Java and C#
+                    Work Experience: Application Developer at Meditech
+            </p>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <br><br>
+            <h1 style="text-align: center;">Contact Us</h1>
+            <h4>Email:</h4>
+            <p>GameplanExample@gmail.com</p>
+            <h4>Phone Number:</h4>
+            <p>123-456-7890</p>
+            <h4>Address:</h4>
+            <p>123 Example St. SW City State</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
