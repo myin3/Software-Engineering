@@ -1,0 +1,207 @@
+{% extends "base_generic.html" %}
+
+<body>
+
+  <!-- navbar starts -->
+  <header class="mynavbar">
+      <div class="navbar navbar-expand-md navbar-dark bg-dark">
+          <button class=" btn navbar-brand ">
+              <h3>GamePlan</h3>
+          </button>
+          <button class=" navbar-toggler btn btn-primary" data-toggle	="collapse" data-target = "#mydiv"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse ml-auto" id="mydiv" >
+
+              <ul class="navbar-nav mx-auto text-center" >
+                  <li class="nav-item pr-5"><a href="#" class="nav-link"><h5>Home</h5></a></li>
+                  <li class="nav-item pr-5 "><a href="popularEventList.html" class="nav-link"><h5>Popular Events</h5></a></li>
+                  <li class="nav-item pr-5 active"><a href="myEventList.html" class="nav-link"><h5>My Events</h5></a></li>
+                  <li class="nav-item pr-5"><a href="#" class="nav-link"><h5>Contact Us</h5></a></li>
+
+                  <li class="nav-item pr-5 ">
+                      <form class="form-inline mr-auto" name="search">
+                          <fieldset class="mx-auto">
+                              <div class="form-group pl-4">
+                                  <input id="searchBox" maxlength="25" type="text" class="form-control input-lg pr-2" placeholder="Search"><br>
+                                  <input class="btn btn-primary" type="submit" value="Search" />
+                              </div>
+                          </fieldset>  
+                      </form>
+                  </li>
+              </ul>
+         
+          </div>
+      </header>
+
+  <!-- navbar ends -->
+
+
+  <!-- Create Event Starts -->
+  <section class="container">
+      <div class="row" id="creatEventBackground">
+          <div class="col-md-6">
+              <h3>Create an Event</h3>
+              <h5>Enjoy with your loved one!</h5>
+              <button class="btn btn-dark " data-toggle ="modal" data-target="#mymodal">Create Event</button>
+      <div class="modal fade" id="mymodal">
+  
+          <div class="modal-dialog modal-dialog-centered">
+  
+              <div class="modal-content">
+  
+                  <div class="modal-header" >
+                      <h5 class="modal-title">Create Event</h5>
+                      <button type="button" class="close" data-dismiss ="modal">&times;</button>
+                  </div>
+  
+                  <div class="modal-body text-dark">
+                      <form action="" >
+                          <div class="form-group ">
+                              <label for="">Enter Event Title:</label>
+                              <input type="text" class="form-control" placeholder="Enter Event Title">
+                          </div>
+
+                          <div class="form-group ">
+                              <label for="">Enter Organizor Name:</label>
+                              <input type="text" class="form-control" placeholder="Enter Organizor Name">
+                          </div>
+
+                          <div class="form-group">
+                              <label for="">Event Location:</label>
+                              <input type="text" class="form-control" placeholder="Enter Location">
+                          </div>
+
+                          <div class="form-group">
+                              <label for="" >Start Date:</label>
+                              <input type="text" class="form-control" placeholder="mm/d/yyyy">
+                          </div>
+                          <div class="form-group">
+                              <label for="">End Date:</label>
+                              <input type="textarea" class="form-control" placeholder="mm/d/yyyy">
+                          </div>
+
+                      </form>
+                        
+                  </div>
+  
+                  <div class="modal-footer justify-content-center">
+                     <button type = "button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+                     <button  class="btn btn-secondary" type="submit" >Save</button>
+                  </div>
+                  
+              </div>
+          </div>
+
+      </div> 
+  </section>
+  <hr>
+
+  <!-- Create Event Ends -->
+
+
+  <!-- Event List Starts -->
+  <section  id="myEventList">
+  <div class="container">
+      <h3 class="text-center">My Event List</h3>
+      <div class="row">
+  
+          <div class="col-md-4 myEventBox">
+              <div class="content">
+                  <div class="myEventDescription card">
+                      <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                      <h3>Event Title</h3>
+                      <a href="ViewMyEventDetails.html">View Details <i class="fa fa fa-arrow-alt-circle-right"></i></a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-md-4 myEventBox">
+              <div class="content">
+                  <div class="myEventDescription card">
+                      <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                      <h3>Event Title</h3>
+                      <a href="ViewMyEventDetails.html">View Details <i class="fa fa fa-arrow-alt-circle-right"></i></a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-md-4 myEventBox">
+              <div class="content">
+                  <div class="myEventDescription card">
+                      <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                      <h3>Event Title</h3>
+                      <a href="ViewMyEventDetails.html">View Details <i class="fa fa fa-arrow-alt-circle-right"></i></a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-md-4 myEventBox">
+              <div class="content">
+                  <div class="myEventDescription card">
+                      <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                      <h3>Event Title</h3>
+                      <a href="ViewMyEventDetails.html">View Details <i class="fa fa fa-arrow-alt-circle-right"></i></a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-md-4 myEventBox">
+              <div class="content">
+                  <div class="myEventDescription card">
+                      <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                      <h3>Event Title</h3>
+                      <a href="ViewMyEventDetails.html">View Details <i class="fa fa fa-arrow-alt-circle-right"></i></a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-md-4 myEventBox">
+              <div class="content">
+                  <div class="myEventDescription card">
+                      <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                      <h3>Event Title</h3>
+                      <a href="ViewMyEventDetails.html">View Details <i class="fa fa fa-arrow-alt-circle-right"></i></a>
+                  </div>
+              </div>
+          </div>
+  
+
+  </div>
+
+      <!-- showMore Button Starts   -->
+  <div class="col-md-12 text-center">
+      <div class="button">
+          <button id="displayMore">Show More</button>
+      </div>
+  </div>
+      <!-- showMore Button Ends -->
+</section>
+
+<!-- Event List Ends -->
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+
+<!-- Script For showMore ButtonStarts -->
+<script>
+
+  $("#displayMore").click(function()
+  {
+      $("#myEventList .myEventBox:hidden").slice(0,3).slideDown();
+      if($("#myEventList .myEventBox:hidden").length == 0)
+      {
+          $("#displayMore").fadeOut("slow");
+      }
+  });
+
+</script>
+
+<!-- Scripts For showMore Ends -->
+
+
+
+
+
+</body>

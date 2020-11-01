@@ -2,8 +2,10 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views import generic
 from gameplanapp.forms import SignUpForm, EventForm
 from gameplanapp.models import Game, Event
+
 # Create your views here.
 
 
@@ -58,4 +60,6 @@ def create_event(request):
         form = EventForm()
     return render(request, 'gameplanapp/create_event.html', {'form': form})
 
-
+class EventListView(generic.ListView):
+    """generic event list view"""
+    model = Event

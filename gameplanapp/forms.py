@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
         max_length=30, required=False, help_text='Optional.')
     last_name = forms.CharField(
         max_length=30, required=False, help_text='Optional.')
-    date_of_birth = forms.DateField(required=False)
+    date_of_birth = forms.DateField(required=False, widget=forms.SelectDateWidget())
 
     class Meta:
         model = User
@@ -24,7 +24,8 @@ class SignUpForm(UserCreationForm):
 
 class EventForm(ModelForm):
     """Form to allow users to create an event"""
-    event_date = forms.DateField()
+    event_date = forms.DateField(widget=forms.SelectDateWidget())
     class Meta:
         model = Event
         fields = ('event_title', 'event_location', 'event_details', 'event_date', 'event_game')
+        
