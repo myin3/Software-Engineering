@@ -26,7 +26,7 @@ SECRET_KEY = 'uep(7k2f902eduqpul96zf&2wvbiy+(h&687+%09(z)-j61+#5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["se-gameplan.herokuapp.com","127.0.0.1"]
 
 
 # Application definition
