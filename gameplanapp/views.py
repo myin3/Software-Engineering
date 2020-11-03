@@ -2,9 +2,10 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic
 from gameplanapp.forms import SignUpForm, EventForm
-from gameplanapp.models import Game, Event
+from gameplanapp.models import Game, Event, GameplanUser
 
 # Create your views here.
 
@@ -67,3 +68,11 @@ class EventListView(generic.ListView):
 class EventDetailView(generic.DetailView):
     """generic event detail view"""
     model = Event
+
+class EventUpdateView(generic.UpdateView):
+    model = Event
+    success_url = reverse_lazy('events')
+
+def join_event(request, pk):
+    request.user.gameplanuser.attend_event(request.user.gameplanuser,pk)
+    return redirect('index')

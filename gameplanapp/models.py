@@ -25,7 +25,7 @@ class Game(models.Model):
     """Model representing a game"""
     game_title = models.CharField(max_length=200)
     game_genre = models.ManyToManyField(Genre, blank=True)
-    
+
     def __str__(self):
         """String for representing the Model object."""
         return self.game_title
@@ -38,6 +38,7 @@ class GameplanUser(models.Model):
     user_email = models.EmailField()
     user_dateofbirth = models.DateField(null=True, blank=True)
     user_bio = models.TextField(default="A simple bio")
+    friends = models.ManyToManyField("self")
 
     def __str__(self):
         return self.user.__str__()
@@ -45,7 +46,15 @@ class GameplanUser(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a particular GamePlanUser instance."""
         return reverse('gameplanuser-detail', args=[str(self.user)])
-    
+
+    def attend_event(self, request, event_id):
+        """make a user attend an event"""
+        event = Event.objects.get(id=event_id)
+        self.event_attending.add(event)
+        self.save()
+        event.save()
+
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     """every time we create a new user, create a gameplanuser as well"""

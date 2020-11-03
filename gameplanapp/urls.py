@@ -11,6 +11,8 @@ urlpatterns = [
     path('create_event/', views.create_event, name='create_event'),
     path('events/', login_required(views.EventListView.as_view()), name='events'),
     path('event/<int:pk>', views.EventDetailView.as_view(), name='event-detail'),
+    path('event/<int:pk>/update/', login_required(views.EventUpdateView.as_view()), name='event-update'),
+    path('event/<int:pk>/join/', views.join_event, name='join')
 
 
 ]
