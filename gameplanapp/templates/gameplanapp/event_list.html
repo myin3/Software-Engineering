@@ -24,7 +24,8 @@
             <div class="col-md-4 myEventBox">
                 <div class="content">
                     <div class="myEventDescription card">
-                        <img src="images/event.png" alt="" class="card-img  img-thumbnail">
+                        {% load static %}
+                        <img src="{% static 'event.png' %}" alt="" class="card-img  img-thumbnail">
                         <h3>{{event.event_title}}</h3>
                         <a href="{{ event.get_absolute_url }}">View Details <i
                                 class="fa fa fa-arrow-alt-circle-right"></i></a>
