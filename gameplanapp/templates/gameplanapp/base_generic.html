@@ -56,13 +56,18 @@
         .navbar a:hover {
             background-color: gray;
         }
+
+        .navbar-right{
+            float: right;
+        }
+
     </style>
 </head>
 
 <body>
 
     <div class="jumbotron text-center bg-dark text-white" style="margin-bottom:0">
-        <a class="text-center text-white bg-dark" src="logo.png" href="Home_Page.html">
+        <a class="text-center text-white bg-dark" src="logo.png" href="{% url 'index' %}">
             <h1>GamePlan</h1>
         </a>
         <p>Team 8</p>
@@ -75,28 +80,35 @@
                 <li class="active"><a class="active" href="{% url 'index' %}">
                         <h3>Home</h3>
                     </a></li>
-                <li class="active"><a class="active" href="{% url 'create_event' %}">
+                <li class="active"><a class="active" href="{% url 'events' %}">
                         <h3>Events</h3>
                     </a></li>
 
             </ul>
-            <div class="navbar navbar-inverse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if request.user.is_authenticated %}
-                    <li class="active"><a class="active" href="{% url 'logout' %}">
-                            <h3>Logout</h3>
-                        </a></li>
-                    {% else %}
-                    <li class="active"><a class="active" href="{% url 'login' %}">
-                            <h3>Login</h3>
-                        </a></li>
-                    {% endif %}
-                </ul>
-            </div>
+            <ul class="nav navbar-toggle navbar-right">
+                {% if request.user.is_authenticated %}
+                <li class="active"><a class="active" href="{% url 'index' %}">
+                        <h3>Friends</h3>
+                    </a></li>
+                <li class="active"><a class="active" href="{% url 'index' %}">
+                        <h3>Profile</h3>
+                    </a></li>
+                <li class="active"><a class="active" href="{% url 'logout' %}">
+                        <h3>Logout</h3>
+                    </a></li>
+                {% else %}
+                <li class="active"><a class="active" href="{% url 'login' %}">
+                        <h3>Login</h3>
+                    </a></li>
+                {% endif %}
+            </ul>
         </div>
     </nav>
-</div>
-
+    </div>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 
 </html>

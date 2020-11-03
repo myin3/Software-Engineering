@@ -63,3 +63,7 @@ def create_event(request):
 class EventListView(generic.ListView):
     """generic event list view"""
     model = Event
+
+class EventDetailView(generic.DetailView):
+    """generic event detail view"""
+    model = Event

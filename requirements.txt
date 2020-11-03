@@ -7,3 +7,4 @@ netifaces==0.10.4
 requests==2.22.0
 requests-unixsocket==0.2.0
 Routes==2.4.1
+python-dotenv

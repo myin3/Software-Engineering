@@ -57,17 +57,19 @@ class Event(models.Model):
     """
     model representing an event
     """
-    event_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     event_title = models.CharField(max_length=200, default="Event Title")
     event_location = models.CharField(max_length=200)
     event_details = models.TextField()
     event_date = models.DateField(null=True, blank=True)
-    event_manager = models.ForeignKey('GamePlanUser',on_delete=models.CASCADE)
-    event_game = models.OneToOneField(Game, on_delete=models.SET_NULL, null=True)
+    event_manager = models.ForeignKey('GamePlanUser', on_delete=models.CASCADE)
+    event_game = models.ForeignKey(Game, blank=True, null=True, on_delete=models.SET_NULL)
     event_status = models.CharField(max_length=200, default='ACTIVE')
+
+    def __str__(self):
+        return self.event_title
 
     def get_absolute_url(self):
         """
         returns a url to access a particular event instance
         """
-        return reverse('event-detail', args=[str(self.event_id)])
+        return reverse('event-detail', args=[str(self.id)])

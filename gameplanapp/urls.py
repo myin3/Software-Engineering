@@ -1,5 +1,6 @@
 """contains the url paths, their names, and their associated views"""
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 from . import views
 
 urlpatterns = [
@@ -8,6 +9,8 @@ urlpatterns = [
     path('logged_out/', views.logged_out, name='logged_out'),
     path('logout/', views.logout_view, name='logout'),
     path('create_event/', views.create_event, name='create_event'),
-    path('events/', views.EventListView.as_view(), name='events')
+    path('events/', login_required(views.EventListView.as_view()), name='events'),
+    path('event/<int:pk>', views.EventDetailView.as_view(), name='event-detail'),
+
 
 ]

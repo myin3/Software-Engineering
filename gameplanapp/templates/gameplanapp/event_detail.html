@@ -1,0 +1,36 @@
+{% extends "gameplanapp/base_generic.html" %}
+{% block content %}
+
+<body>
+
+    <!-- Event Details -->
+    <section class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>Title : </h3>
+                    <h3>Location: </h3>
+                    <h3>Start Date: </h3>
+                    <h3>End Date: </h3>
+                    <h3>Organizor: </h3>
+                    <h3>Event Description: </h3> 
+                    <h4>No of Members Attending: </h4>
+
+                </div>
+                <div class="col-lg-5">
+                    <img src="images/event.png" alt="" class="eventImg">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-10 col-sm-10 col-md-10">
+                    <button class="btn btn-dark text-warning">Edit</button>
+                    <a href="myEventList.html" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Back</button></a>
+                </div>
+
+            </div>
+    
+        </section>
+
+        <!-- Event Details End -->
+{% endblock %}   

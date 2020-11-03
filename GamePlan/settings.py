@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,11 +82,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gameplandb',
-        'USER': 'root',
-        'PASSWORD': 'DZmJdg7U8fWYcXM',
-        'HOST': '34.73.206.188'
+        'USER': os.getenv("DATABASEUSER"),
+        'PASSWORD': os.getenv("DATABASEPASSWORD"),
+        'HOST': '34.73.179.96'
     }
 }
+
 
 
 # Password validation
