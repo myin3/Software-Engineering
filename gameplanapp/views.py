@@ -68,11 +68,24 @@ class EventListView(generic.ListView):
 class EventDetailView(generic.DetailView):
     """generic event detail view"""
     model = Event
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
+        return context
 
 class EventUpdateView(generic.UpdateView):
     model = Event
+
+class EventDelete(generic.DeleteView):
+    model = Event
     success_url = reverse_lazy('events')
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+
 
 def join_event(request, pk):
-    request.user.gameplanuser.attend_event(request.user.gameplanuser,pk)
-    return redirect('index')
+    request.user.gameplanuser.attend_event(pk)
+    return redirect(reverse_lazy('events'))

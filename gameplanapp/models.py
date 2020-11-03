@@ -47,7 +47,7 @@ class GameplanUser(models.Model):
         """Returns the url to access a particular GamePlanUser instance."""
         return reverse('gameplanuser-detail', args=[str(self.user)])
 
-    def attend_event(self, request, event_id):
+    def attend_event(self, event_id):
         """make a user attend an event"""
         event = Event.objects.get(id=event_id)
         self.event_attending.add(event)

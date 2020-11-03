@@ -28,6 +28,3 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         fields = ('event_title', 'event_location', 'event_details', 'event_date', 'event_game')
-        
-class JoinEventForm(forms.Form):
-    join_event = forms.BooleanField()
