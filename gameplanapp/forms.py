@@ -1,4 +1,5 @@
 """Forms for data users can enter"""
+from datetime import date
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
@@ -15,7 +16,8 @@ class SignUpForm(UserCreationForm):
         max_length=30, required=False, help_text='Optional.')
     last_name = forms.CharField(
         max_length=30, required=False, help_text='Optional.')
-    date_of_birth = forms.DateField(required=False, widget=forms.SelectDateWidget())
+    year_range = [date.today().year - item for item in list(range(0, 100))]
+    date_of_birth = forms.DateField(required=False, widget=forms.SelectDateWidget(years=year_range))
 
     class Meta:
         model = User
