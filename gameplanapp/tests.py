@@ -30,12 +30,10 @@ class GameplanUserModelTest(TestCase):
 class EventModelTest(TestCase):
     """tests for the event model"""
     def setUpTestData(self):
-        test_user = User.objects.create(
-            username='test_user', password='1X<ISRUkw+tuK')
-        test_gameplanuser = GameplanUser.objects.create(
-            user=test_user, user_dateofbirth=date.today(), user_email="test@gmail.com")
         test_event = Event.objects.create(event_title="Test Event Title",
-                                          event_location="Test Location", event_manager=test_user, event_date=date.today())
-        test_user.save()
-        test_gameplanuser.save()
+                                          event_location="Test Location", event_manager=User.objects.get(id=1), event_date=date.today())
         test_event.save()
+
+    def test_event_date(self):
+        test_event = Event.objects.get(id=1)
+        self.assertEqual(test_event.event_date, date.today())
