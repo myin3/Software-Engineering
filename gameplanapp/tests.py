@@ -29,9 +29,15 @@ class GameplanUserModelTest(TestCase):
 
 class EventModelTest(TestCase):
     """tests for the event model"""
-    def setUpTestData(self):
+    @classmethod
+    def setUpTestData(cls):
+        test_user = User.objects.create(
+        username='test_user', password='1X<ISRUkw+tuK')
+        test_user.save()
+        test_user.gameplanuser.user_dateofbirth = date.today()
+        test_user.gameplanuser.save()
         test_event = Event.objects.create(event_title="Test Event Title",
-                                          event_location="Test Location", event_manager=User.objects.get(id=1), event_date=date.today())
+                                          event_location="Test Location", event_manager=User.objects.get(id=1).gameplanuser, event_date=date.today())
         test_event.save()
 
     def test_event_date(self):
