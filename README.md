@@ -7,7 +7,7 @@ Team Members - Matthew Yin, Soojie Chin, Amber Pradhan, Raghuveer Gummadi
 
 Implementation
 
-To see the running website: https://se-gameplan.herokuapp.com/admin
+To see the running website: https://se-gameplan.herokuapp.com/
 
 To run your own copy:
 Go to the linked Github https://github.com/myin3/Software-Engineering and clone the repository
