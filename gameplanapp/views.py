@@ -61,6 +61,10 @@ def create_event(request):
         form = EventForm()
     return render(request, 'gameplanapp/create_event.html', {'form': form})
 
+class UserProfileView(generic.DetailView):
+    """View for the user profile page"""
+    model = GameplanUser
+
 class EventListView(generic.ListView):
     """generic event list view"""
     model = Event

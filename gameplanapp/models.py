@@ -34,7 +34,8 @@ class Game(models.Model):
 class GameplanUser(models.Model):
     """Model representing a user."""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    event_attending = models.ManyToManyField('Event', related_name='attending', blank=True)
+    event_attending = models.ManyToManyField(
+        'Event', related_name='attending', blank=True)
     user_email = models.EmailField()
     user_dateofbirth = models.DateField(null=True, blank=True)
     user_bio = models.TextField(default="A simple bio")
@@ -45,7 +46,7 @@ class GameplanUser(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a particular GamePlanUser instance."""
-        return reverse('gameplanuser-detail', args=[str(self.user)])
+        return reverse('profile', args=[str(self.id)])
 
     def attend_event(self, event_id):
         """make a user attend an event"""
@@ -62,6 +63,7 @@ def update_user_profile(sender, instance, created, **kwargs):
         GameplanUser.objects.create(user=instance)
     instance.gameplanuser.save()
 
+
 class Event(models.Model):
     """
     model representing an event
@@ -71,7 +73,8 @@ class Event(models.Model):
     event_details = models.TextField()
     event_date = models.DateField(null=True, blank=True)
     event_manager = models.ForeignKey('GamePlanUser', on_delete=models.CASCADE)
-    event_game = models.ForeignKey(Game, blank=True, null=True, on_delete=models.SET_NULL)
+    event_game = models.ForeignKey(
+        Game, blank=True, null=True, on_delete=models.SET_NULL)
     event_status = models.CharField(max_length=200, default='ACTIVE')
 
     def __str__(self):
@@ -81,4 +84,25 @@ class Event(models.Model):
         """
         returns a url to access a particular event instance
         """
-        return reverse('event-detail', args=[str(self.id)])
+        return reverse('event_detail', args=[str(self.id)])
+
+
+class Friendship(models.Model):
+    """
+    model for the friendship table
+    """
+    friend_user = models.ForeignKey('User', on_delete=models.CASCADE)
+    friend = models.ForeignKey('User', on_delete=models.CASCADE)
+    
+
+
+class Message(object):
+    """
+    docstring
+    """
+    sender = models.ForeignKey(
+        'GamePlanUser', on_delete=models.CASCADE, related_name='sender')
+    recipient = models.ForeignKey(
+        'GamePlanUser', on_delete=models.CASCADE, related_name="recipient")
+    contents = models.TextField()
+    

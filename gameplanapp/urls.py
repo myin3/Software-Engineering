@@ -10,10 +10,11 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('create_event/', views.create_event, name='create_event'),
     path('events/', login_required(views.EventListView.as_view()), name='events'),
-    path('event/<int:pk>', views.EventDetailView.as_view(), name='event-detail'),
-    path('event/<int:pk>/update/', login_required(views.EventUpdateView.as_view()), name='event-update'),
+    path('event/<int:pk>', views.EventDetailView.as_view(), name='event_detail'),
+    path('event/<int:pk>/update/', login_required(views.EventUpdateView.as_view()), name='event_update'),
     path('event/<int:pk>/join/', views.join_event, name='join'),
-    path('event/<int:pk>/delete', login_required(views.EventDelete.as_view()), name='event-delete')
+    path('event/<int:pk>/delete', login_required(views.EventDelete.as_view()), name='event_delete'),
+    path('user/<int:pk>', views.UserProfileView.as_view(), name='profile')
 
 
 ]

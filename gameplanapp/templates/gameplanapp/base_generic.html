@@ -92,7 +92,7 @@
                 <li class="active"><a class="active" href="{% url 'index' %}">
                         <h3>Friends</h3>
                     </a></li>
-                <li class="active"><a class="active" href="{% url 'index' %}">
+                <li class="active"><a class="active" href="{{ request.user.gameplanuser.get_absolute_url }}">
                         <h3>Profile</h3>
                     </a></li>
                 <li class="active"><a class="active" href="{% url 'logout' %}">
