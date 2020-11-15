@@ -39,8 +39,7 @@ class GameplanUser(models.Model):
     user_email = models.EmailField()
     user_dateofbirth = models.DateField(null=True, blank=True)
     user_bio = models.TextField(default="A simple bio")
-    friends = models.ManyToManyField("self")
-
+    profile_picture = models.ImageField(null=True, blank=True)
     def __str__(self):
         return self.user.__str__()
 
@@ -86,13 +85,19 @@ class Event(models.Model):
         """
         return reverse('event_detail', args=[str(self.id)])
 
+class EventGallery(models.Model):
+    """
+    list of pictures for each event
+    """
+    gallery_event = models.ForeignKey('Event', on_delete=models.CASCADE)
+    gallery_picture = models.ImageField()
 
 class Friendship(models.Model):
     """
     model for the friendship table
     """
-    friend_user = models.ForeignKey('User', on_delete=models.CASCADE)
-    friend = models.ForeignKey('User', on_delete=models.CASCADE)
+    friend_user = models.ForeignKey('GameplanUser', on_delete=models.CASCADE, related_name="friend_one")
+    friend = models.ForeignKey('GameplanUser', on_delete=models.CASCADE, related_name="friend_two")
     
 
 
@@ -101,8 +106,8 @@ class Message(object):
     docstring
     """
     sender = models.ForeignKey(
-        'GamePlanUser', on_delete=models.CASCADE, related_name='sender')
+        'GameplanUser', on_delete=models.CASCADE, related_name='sender')
     recipient = models.ForeignKey(
-        'GamePlanUser', on_delete=models.CASCADE, related_name="recipient")
+        'GameplanUser', on_delete=models.CASCADE, related_name="recipient")
     contents = models.TextField()
     
