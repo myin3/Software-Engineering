@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from gameplanapp.models import Event
+from gameplanapp.models import Event, GameplanUser
 User = get_user_model()
 
 
@@ -30,3 +30,15 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         fields = ('event_title', 'event_location', 'event_details', 'event_date', 'event_game')
+
+class UserBioForm(ModelForm):
+    """form on the user profile page"""
+    class Meta:
+        Model = GameplanUser
+        fields = ('user_bio',)
+
+class UserProfilePageForm(ModelForm):
+    profile_picture = forms.ImageField()
+    class Meta:
+        model = GameplanUser
+        fields = ('user_dateofbirth', 'user_email')

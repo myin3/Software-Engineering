@@ -1,0 +1,21 @@
+{% extends "gameplanapp/base_generic.html" %}
+{% block content %}
+
+<body>
+
+    <!-- Event Details -->
+    <section class="container">
+        <h2>Edit Event</h2>
+            <div class="row">
+                {% block form %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary btn-block btn-lg" value="Update">
+                </form>
+                {% endblock %}    
+            </div>    
+        </section>
+
+        <!-- Event Details End -->
+{% endblock %}   

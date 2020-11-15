@@ -89,7 +89,7 @@
             </ul>
             <ul class="nav navbar-toggle navbar-right">
                 {% if request.user.is_authenticated %}
-                <li class="active"><a class="active" href="{% url 'index' %}">
+                <li class="active"><a class="active" href="{% url 'friends' %}">
                         <h3>Friends</h3>
                     </a></li>
                 <li class="active"><a class="active" href="{{ request.user.gameplanuser.get_absolute_url }}">

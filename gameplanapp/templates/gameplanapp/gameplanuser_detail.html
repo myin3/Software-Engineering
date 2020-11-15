@@ -1,0 +1,24 @@
+{% extends "gameplanapp/base_generic.html" %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+               <h1>Name: {{ request.user.username }}</h1>
+               <img src="http://via.placeholder.com/300x250" />
+               <p>Description: {{gameplanuser.user_bio}}</p>
+            </div>
+            <div class="col-lg-3">
+                <h1>Friends List</h1>
+                <table class="table table-hover">
+                    <tbody>
+                    {% for friendship in friends_list %}
+                    <td>{{friendship.friend.user.username}}</td>           
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

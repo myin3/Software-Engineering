@@ -14,7 +14,8 @@ urlpatterns = [
     path('event/<int:pk>/update/', login_required(views.EventUpdateView.as_view()), name='event_update'),
     path('event/<int:pk>/join/', views.join_event, name='join'),
     path('event/<int:pk>/delete', login_required(views.EventDelete.as_view()), name='event_delete'),
-    path('user/<int:pk>', views.UserProfileView.as_view(), name='profile')
-
-
+    path('user/<int:pk>', login_required(views.UserProfileView.as_view()), name='GameplanUser_detail'),
+    path('user/<int:pk>/update', login_required(views.UserProfileUpdateView.as_view()), name='GameplanUser_update'),
+    path('friends/', views.friendsview, name='friends'),
+    path('user/<int:pk>/addfriend/', views.addfriendview, name="addfriend")
 ]

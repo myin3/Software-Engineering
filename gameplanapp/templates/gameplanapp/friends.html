@@ -2,57 +2,57 @@
 {% block content %}
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-                <!-- Spacing -->
-            </div>
-            <div class="col-lg-3">
-                <table class="table table-hover">
-                    <thead>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+            <!-- Spacing -->
+        </div>
+        <div class="col-lg-3">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <br>
+                        <th>
+                            <h2>Potential Friends</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {% for gameplanuser in user_list %}
+                        {% if gameplanuser not in excludefromuser_list %}
                         <tr>
-                            <br>
-                            <th>
-                                <h2>Potential Friends</h2>
-                            </th>
+                            <td>{{gameplanuser.user.username}}</td>
+                            <td><a href="/gameplanapp/user/{{gameplanuser.user.id}}/addfriend/" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Add</button></a></td>
                         </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-3">
-                <table class="table table-hover">
-                    <thead>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-3">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <br>
+                        <th>
+                            <h2>Friends</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {% for friend in existing_friends%}
                         <tr>
-                            <br>
-                            <th>
-                                <h2>Online Friends</h2>
-                            </th>
+                            <td>{{friend.user.username}}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-3">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <br>
-                            <th>
-                                <h2>Offline Friends</h2>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
+                        {% endfor %}
+                    </ul>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 {% endblock %}

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from gameplanapp.forms import SignUpForm, EventForm
-from gameplanapp.models import Game, Event, GameplanUser
+from gameplanapp.models import Game, Event, GameplanUser, Friendship
 
 # Create your views here.
 
@@ -26,7 +26,8 @@ def signup(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.gameplanuser.user_dateofbirth = form.cleaned_data.get(
-                'birth_date')
+                'date_of_birth')
+            user.gameplanuser.user_email = form.cleaned_data.get('email')
             user.first_name = form.cleaned_data.get('first_name')
             user.last_name = form.cleaned_data.get('last_name')
             user.save()
@@ -61,10 +62,6 @@ def create_event(request):
         form = EventForm()
     return render(request, 'gameplanapp/create_event.html', {'form': form})
 
-class UserProfileView(generic.DetailView):
-    """View for the user profile page"""
-    model = GameplanUser
-
 class EventListView(generic.ListView):
     """generic event list view"""
     model = Event
@@ -81,6 +78,7 @@ class EventDetailView(generic.DetailView):
 
 class EventUpdateView(generic.UpdateView):
     model = Event
+    form_class = EventForm
 
 class EventDelete(generic.DeleteView):
     model = Event
@@ -93,10 +91,41 @@ class EventDelete(generic.DeleteView):
 def join_event(request, pk):
     request.user.gameplanuser.attend_event(pk)
     return redirect(reverse_lazy('events'))
-    
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
         return context
+
+class UserProfileView(generic.DetailView):
+    """View for the user profile page"""
+    model = GameplanUser
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
+        context['friends_list'] = Friendship.objects.filter(friend_user=self.request.user.gameplanuser)
+        return context
+
+class UserProfileUpdateView(generic.UpdateView):
+    model = GameplanUser
+    fields = ['user_bio', 'user_dateofbirth', 'user_email', 'profile_picture']
+
+@login_required
+def friendsview(request):
+    user_list = GameplanUser.objects.all()
+    friends_list = Friendship.objects.filter(friend_user=request.user.gameplanuser)
+    existing_friends = [friendship.friend for friendship in friends_list]
+    excludefromuser_list = existing_friends + [request.user.gameplanuser]
+    context = {'user_list': user_list,
+               'friends_list': friends_list,
+               'existing_friends': existing_friends,
+               'excludefromuser_list': excludefromuser_list}
+    return render(request, 'gameplanapp/friends.html', context)
+
+def addfriendview(request, pk):
+    request.user.gameplanuser.addfriend(pk)
+    return(redirect(reverse_lazy('friends')))

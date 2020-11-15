@@ -39,7 +39,7 @@ class GameplanUser(models.Model):
     user_email = models.EmailField()
     user_dateofbirth = models.DateField(null=True, blank=True)
     user_bio = models.TextField(default="A simple bio")
-    profile_picture = models.ImageField(null=True, blank=True)
+    profile_picture = models.ImageField(null=True, blank=True, upload_to='profiles')
     def __str__(self):
         return self.user.__str__()
 
@@ -54,7 +54,12 @@ class GameplanUser(models.Model):
         self.save()
         event.save()
 
-
+    def addfriend(self, second_user_id):
+        """add a user as a friend"""
+        second_user = User.objects.get(id=second_user_id)
+        new_friendship = Friendship.objects.create(friend_user=self, friend=second_user.gameplanuser)
+        new_friendship.save()
+        
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     """every time we create a new user, create a gameplanuser as well"""
@@ -90,7 +95,7 @@ class EventGallery(models.Model):
     list of pictures for each event
     """
     gallery_event = models.ForeignKey('Event', on_delete=models.CASCADE)
-    gallery_picture = models.ImageField()
+    gallery_picture = models.ImageField(upload_to='gallery')
 
 class Friendship(models.Model):
     """
