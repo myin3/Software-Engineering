@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+
+
+    .main {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.3;
+        position: absolute;
+        display: none;
+    }
+
+    ul,
+    li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+
+    .mycontact{
+        margin: 10px 0 0 10px;
+        height: 400px; 
+        width: 400px; 
+        overflow:scroll; 
+        border: 1px solid gray;
+        border-radius: 7px;
+    }
+    
+    .myprofile{
+        margin-left: 6px;
+        cursor: pointer;
+        height: 80px;
+        width: 80px;
+    }
+
+ 
+    .myname {
+       margin-left: 10px;
+    }
+
+   
+    
+    .mytext{
+        margin-left: 5px;
+    }
+    .mymessage {
+        margin-left: 10px;
+    }
+
+   
+
+
+    .container{
+        position: absolute;
+        top: 10%;
+        left: 40%;
+        display: none;
+        border: 1px solid white;
+        border-radius: 7px;
+        height: 350px;
+        width: 400px;
+    
+    }
+    .text-area{
+        overflow-y: scroll;
+        border: 1px solid whitesmoke;
+        height: 150px;
+        width: 100%;
+        color: black;
+    }
+
+    .titlename {
+        float: right;
+        margin-right: 150px;
+        margin-top: 30px;
+    }
+
+    .delete {
+        position: absolute;
+        margin-left: 260px;
+        
+    }
+
+    .glyphicon {
+        margin-top: 10px;
+        font-size: 35px;
+    }
+
+    .mybutton {
+        margin: 10px 0 0 10px;
+        
+    }
+</style>
+
+    
+</head>
+<body>
+    <div class="main">main</div>
+    <button class="btn btn-primary mybutton">My Message</button>
+
+    <div class="mycontact">
+        <div class="contactlist"></div>
+        <ul class="people" >
+                   
+        </ul>
+    </div>
+    
+
+    
+    
+    <div class="container ">
+        <div class="text-box">
+            <div class="text-header">
+                <br>
+                <div class="message-header" style="display: inline;">
+                    <span> <img  alt="" id="show_img" style="height: 60px; width: 60px;"></span>
+                    
+                    <h3 class="titlename" id="output"></h3>
+                    
+                    <a href="#" class="delete">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                    
+                </div>
+            </div>
+            <br>
+            <div class="text-area">    
+            </div>
+            <hr>
+            <div>
+                <input type="text" placeholder="type your message" class="form-control">
+            </div>
+        </div>
+
+    </div>
+
+
+    <hr>
+</div>
+
+    <script>
+
+                    $(document).ready(function () {
+                                $(".mybutton").click(function () {
+
+                                    $(".mycontact").slideToggle("slow");
+
+
+                        
+
+                            });
+
+                        const ul = document.querySelector('.people');
+                            let people = ['amber', ' pradh', 'dada', 'radhika','testing'];
+
+                            let html = ``;
+
+                            people.forEach(person => {
+                                html += `
+                            
+                            <hr>
+                                <ul>
+                                    <li>
+                                <div class="myprofile">
+                                <img src="female.jpg" alt="" class="myprofile">
+                                </div>
+                                <div class="myname">
+                                <h3 class="gita" id="h4">${person}</h3>
+                               
+                                    </li>
+                                    <div class="mytext1">
+                                <p class="mymessage">Hey How are you ?</p>
+                                    </div>
+                                        </ul>
+                                        `;
+                            });
+                            
+                            ul.innerHTML = html;
+                            
+    
+                        $(".myprofile, .mycontact").click(function () {
+                            var img_src = $(this).attr("src");
+                            $("#show_img").attr("src", img_src);
+
+                            var listItems = document.querySelectorAll("ul li");
+                            listItems.forEach(function (item) {
+                                item.onclick = function (e) {
+                                    
+                                   document.getElementById('output').innerText = this.innerText;
+                                }
+                            });
+                $(".container").show();
+                $(".main").show();
+    
+    
+            });
+    
+            $(".main").click(function(){
+                $(".container").css("display","none");
+                $(".main").css("display","none")
+            });
+           
+        });
+    </script>
+</body>
+</html>
