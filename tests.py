@@ -33,7 +33,7 @@ class GameplanUserModelTest(TestCase):
         test_user=User.objects.get(username='test_user')
         test_gameplanuser=GameplanUser.objects.get(user=user)
         self.assertEqual(test_gameplanuser.user_bio, "Sample user bio")
-        
+
 
 
 
@@ -95,3 +95,31 @@ class JoinEventTest(TestCase):
         user.event_attending.remove(test_event)
         containsevent = test_event in user.gameplanuser.event_attending.all()
         self.assertFalse(containsevent)
+
+        class FriendTest(TestCase):
+    def setUp(self):
+        # Setup run before every test method.
+        test_user1 = User.objects.create(
+            username='test_user1', password='1X<ISRUkw+tuK')
+        test_user1.save()
+        test_user2 = User.objects.create(
+            username='test_user2', password='1X<ISRUkw+tuK')
+        test_user2.save()
+        test_event = Event.objects.create(event_title="Test Event Title", event_location="Test Location",
+                                          event_manager=User.objects.get(username="test_user1").gameplanuser, event_date=date.today())
+        test_event.save()
+
+        pass
+
+    def testaddFriend(self):
+        user1 = User.objects.get(username='test_user1')
+        user2 = User.objects.get(username='test_user2')
+        user1.gameplanuser.addfriend(second_user_id=user2.id)
+        test_Friend = Friendship.objects.get(friend_user=user1.gameplanuser, friend=user2.gameplanuser)
+        if(test_Friend.friend_user.user.username == 'test_user1'):
+            if(test_Friend.friend.user.username == 'test_user2'):
+                self.assertTrue(True)
+            else:
+                self.assertTrue(False)
+        else:
+            self.assertFalse(True)
