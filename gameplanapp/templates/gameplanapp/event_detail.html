@@ -40,4 +40,28 @@
         </section>
 
         <!-- Event Details End -->
+        <section id="Gallery">
+            <div class="container">
+                <h3 class="text-center">Event Gallery</h3>
+                <div class="row">
+                    {% if eventgallery_list %}
+        
+                    {% for eventgallery in eventgallery_list %}
+                    <div class="col-md-4 myEventBox">
+                        <div class="content">
+                            <div class="myEventDescription card">
+                                {% load static %}
+                                <img src="{{eventgallery.gallery_picture.url}}" alt="" class="card-img  img-thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                        <p>There are no pictures to show.</p>
+                    {% endif %}    
+                </div>
+                <div class="row">
+                    <a href="/gameplanapp/event/{{event.id}}/addgalleryphoto" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Add picture</button></a>
+                </div>
+        </section>
 {% endblock %}   

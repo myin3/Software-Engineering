@@ -108,7 +108,7 @@ class Friendship(models.Model):
 
 class Message(object):
     """
-    docstring
+    model to send message from one user to the next
     """
     sender = models.ForeignKey(
         'GameplanUser', on_delete=models.CASCADE, related_name='sender')

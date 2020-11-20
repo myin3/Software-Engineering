@@ -74,6 +74,7 @@ class EventDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
+        context['eventgallery_list'] = EventGallery.objects.filter(gallery_event=self.object)
         return context
 
 class EventUpdateView(generic.UpdateView):
@@ -131,8 +132,8 @@ def addfriendview(request, pk):
     return(redirect(reverse_lazy('friends')))
 
 def addGalleryPictureView(request,pk):
-        if request.method == 'POST':
-        form = EventGalleryForm(request.POST)
+    if request.method == 'POST':
+        form = EventGalleryForm(request.POST,request.FILES)
         if form.is_valid():
             eventgallery = form.save(commit=False)
             eventgallery.gallery_event = Event.objects.get(pk=pk)
