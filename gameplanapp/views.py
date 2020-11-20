@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from gameplanapp.forms import SignUpForm, EventForm
-from gameplanapp.models import Game, Event, GameplanUser, Friendship
+from gameplanapp.forms import SignUpForm, EventForm, UserProfilePageForm, EventGalleryForm
+from gameplanapp.models import Game, Event, GameplanUser, Friendship, EventGallery
 
 # Create your views here.
 
@@ -112,7 +112,7 @@ class UserProfileView(generic.DetailView):
 
 class UserProfileUpdateView(generic.UpdateView):
     model = GameplanUser
-    fields = ['user_bio', 'user_dateofbirth', 'user_email', 'profile_picture']
+    form_class = UserProfilePageForm
 
 @login_required
 def friendsview(request):
@@ -129,3 +129,15 @@ def friendsview(request):
 def addfriendview(request, pk):
     request.user.gameplanuser.addfriend(pk)
     return(redirect(reverse_lazy('friends')))
+
+def addGalleryPictureView(request,pk):
+        if request.method == 'POST':
+        form = EventGalleryForm(request.POST)
+        if form.is_valid():
+            eventgallery = form.save(commit=False)
+            eventgallery.gallery_event = Event.objects.get(pk=pk)
+            eventgallery = form.save()
+            return redirect(eventgallery.gallery_event.get_absolute_url())
+    else:
+        form = EventGalleryForm()
+    return render(request, 'gameplanapp/addgalleryphoto.html', {'form': form})

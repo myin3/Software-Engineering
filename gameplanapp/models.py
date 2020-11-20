@@ -95,7 +95,7 @@ class EventGallery(models.Model):
     list of pictures for each event
     """
     gallery_event = models.ForeignKey('Event', on_delete=models.CASCADE)
-    gallery_picture = models.ImageField(upload_to='gallery')
+    gallery_picture = models.ImageField(upload_to='gallery', null=True, blank=True)
 
 class Friendship(models.Model):
     """

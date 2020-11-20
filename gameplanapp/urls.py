@@ -17,5 +17,6 @@ urlpatterns = [
     path('user/<int:pk>', login_required(views.UserProfileView.as_view()), name='GameplanUser_detail'),
     path('user/<int:pk>/update/', login_required(views.UserProfileUpdateView.as_view()), name='GameplanUser_update'),
     path('friends/', views.friendsview, name='friends'),
-    path('user/<int:pk>/addfriend/', views.addfriendview, name="addfriend")
+    path('user/<int:pk>/addfriend/', views.addfriendview, name="addfriend"),
+    path('event/<int:pk>/addgalleryphoto/',views.addGalleryPictureView, name="addgalleryphoto")
 ]
