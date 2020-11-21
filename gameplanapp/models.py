@@ -106,7 +106,7 @@ class Friendship(models.Model):
     
 
 
-class Message(object):
+class Message(models.Model):
     """
     model to send message from one user to the next
     """
