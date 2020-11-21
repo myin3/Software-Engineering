@@ -2,7 +2,7 @@ from datetime import date
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 # Create your tests here.
-from gameplanapp.models import Event, GameplanUser, Friendship
+from gameplanapp.models import Event, GameplanUser, Friendship, Message, EventGallery
 
 User = get_user_model()
 
@@ -34,6 +34,11 @@ class GameplanUserModelTest(TestCase):
         test_gameplanuser=GameplanUser.objects.get(user=test_user)
         self.assertEqual(test_gameplanuser.user_bio, "Sample user bio")
 
+    def testProfilePicture(self):
+        test_user=User.objects.get(username='test_user')
+        test_gameplanuser = GameplanUser.objects.get(user=test_user)
+        test_gameplanuser.profile_picture = "image.png"
+        self.assertIsNotNone(test_gameplanuser.profile_picture)
 
 class EventModelTest(TestCase):
     """tests for the event model"""
@@ -50,15 +55,20 @@ class EventModelTest(TestCase):
 
     def test_event_date(self):
         test_event = Event.objects.get(id=1)
-        test_user = User.objects.get(id=1)
-        User.username
         self.assertEqual(test_event.event_date, date.today())
+
+    def test_event_location(self):
+        test_event = Event.objects.get(id=1)
+        self.assertIsNotNone(test_event.event_location)
 
     def test_event_manager(self):
         test_event = Event.objects.get(id=1)
         test_user = User.objects.get(id=1)
         self.assertEqual(test_event.event_manager.user.username, test_user.username)
 
+    def test_gallery(self):
+        test_event = Event.objects.get(id=1)
+        EventGallery.objects.create(gallery_event=test_event)
 
 class JoinEventTest(TestCase):
     def setUp(self):
@@ -120,3 +130,12 @@ class FriendTest(TestCase):
                 self.assertTrue(False)
         else:
             self.assertFalse(True)
+
+    def testMessaging(self):
+        user1 = User.objects.get(username='test_user1')
+        user2 = User.objects.get(username='test_user2')
+        mess = Message.objects.create(sender=user1.gameplanuser, recipient=user2.gameplanuser, contents="Hello")
+        mess.save()
+        user2Mess = Message.objects.filter(recipient=user2.gameplanuser)
+        user1Mess = Message.objects.filter(sender=user1.gameplanuser)
+        self.assertEqual(str(user1Mess), str(user2Mess))
