@@ -1,0 +1,20 @@
+{% extends "gameplanapp/base_generic.html" %}
+{% block content %}
+
+<body>
+
+    <!-- Message Details -->
+    <section class="container">
+        <h2>Message Detail</h2>
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>Sender : {{message.sender}}</h3>
+                    <h3>Recipient: {{message.recipient}}</h3>
+                    <h3>Contents: {{message.contents}}</h3>
+
+                </div>
+            </div>    
+        </section>
+
+        <!-- Message Details End -->
+{% endblock %}  

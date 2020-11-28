@@ -54,6 +54,13 @@ class GameplanUser(models.Model):
         self.save()
         event.save()
 
+    def leave_event(self, event_id):
+        """make user unattend event"""
+        event = Event.objects.get(id=event_id)
+        self.event_attending.remove(event)
+        self.save()
+        event.save()
+
     def addfriend(self, second_user_id):
         """add a user as a friend"""
         second_user = User.objects.get(id=second_user_id)
@@ -116,3 +123,9 @@ class Message(models.Model):
         'GameplanUser', on_delete=models.CASCADE, related_name="recipient")
     contents = models.TextField()
     
+
+    def get_absolute_url(self):
+        """
+        returns a url to access a particular message instance
+        """
+        return reverse('message_detail', args=[str(self.id)])

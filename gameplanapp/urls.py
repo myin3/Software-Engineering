@@ -13,10 +13,14 @@ urlpatterns = [
     path('event/<int:pk>', views.EventDetailView.as_view(), name='event_detail'),
     path('event/<int:pk>/update/', login_required(views.EventUpdateView.as_view()), name='event_update'),
     path('event/<int:pk>/join/', views.join_event, name='join'),
+    path('event/<int:pk>/leave/', views.join_event, name='leave'),
     path('event/<int:pk>/delete', login_required(views.EventDelete.as_view()), name='event_delete'),
     path('user/<int:pk>', login_required(views.UserProfileView.as_view()), name='GameplanUser_detail'),
     path('user/<int:pk>/update/', login_required(views.UserProfileUpdateView.as_view()), name='GameplanUser_update'),
     path('friends/', views.friendsview, name='friends'),
+    path('messages/', login_required(views.MessageListView.as_view()), name="messages"),
+    path('create_message/', login_required(views.CreateMessageView.as_view()), name='create_message'),
+    path('message/<int:pk>', login_required(views.MessageDetailView.as_view()), name="message_detail"),
     path('user/<int:pk>/addfriend/', views.addfriendview, name="addfriend"),
-    path('event/<int:pk>/addgalleryphoto/',views.addGalleryPictureView, name="addgalleryphoto")
+    path('event/<int:pk>/addgalleryphoto/', views.addGalleryPictureView, name="addgalleryphoto")
 ]

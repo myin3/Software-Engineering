@@ -1,0 +1,31 @@
+{% extends "gameplanapp/base_generic.html" %}
+{% block content %}
+<!-- Create Message Starts -->
+<section class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-dark " href="{% url 'create_message' %}" roll="button">Write a new message</a>
+</section>
+<hr>
+
+<!-- Create Message Ends -->
+<section id="MessageList">
+    <div class="container">
+        <h3 class="text-center">Received Messages</h3>
+        <table>
+            <tbody>
+            {% if message_list %}
+
+            {% for message in message_list %}
+            <tr>
+                <td><b>From:</b> {{message.sender}} <b>Contents:</b> <a href="{{message.get_absolute_url}}">{{message.contents|truncatewords:50}}</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+                <p>You have no messages.</p>
+            {% endif %}
+            </tbody> 
+        </table>
+
+</section>
+{% endblock %}

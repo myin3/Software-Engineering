@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from gameplanapp.forms import SignUpForm, EventForm, UserProfilePageForm, EventGalleryForm
-from gameplanapp.models import Game, Event, GameplanUser, Friendship, EventGallery
+from gameplanapp.forms import SignUpForm, EventForm, UserProfilePageForm, EventGalleryForm, MessageForm, EventFeedbackForm
+from gameplanapp.models import Game, Event, GameplanUser, Friendship, EventGallery, Message
 
 # Create your views here.
 
@@ -17,6 +17,7 @@ def index(request):
     context = {'events_list': events_list,
                'games_list': games_list}
     return render(request, 'gameplanapp/index.html', context)
+
 
 def signup(request):
     """create user and gameplanuser objects"""
@@ -39,14 +40,17 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'gameplanapp/signup.html', {'form': form})
 
+
 def logged_out(request):
     """log out splash page"""
     return render(request, 'gameplanapp/logged_out.html')
+
 
 def logout_view(request):
     """log out and redirect"""
     logout(request)
     return redirect('/gameplanapp/logged_out/')
+
 
 @login_required
 def create_event(request):
@@ -62,31 +66,37 @@ def create_event(request):
         form = EventForm()
     return render(request, 'gameplanapp/create_event.html', {'form': form})
 
+
 class EventListView(generic.ListView):
     """generic event list view"""
     model = Event
 
+
 class EventDetailView(generic.DetailView):
     """generic event detail view"""
     model = Event
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
-        context['eventgallery_list'] = EventGallery.objects.filter(gallery_event=self.object)
+        context['eventgallery_list'] = EventGallery.objects.filter(
+            gallery_event=self.object)
         return context
+
 
 class EventUpdateView(generic.UpdateView):
     model = Event
     form_class = EventForm
 
+
 class EventDelete(generic.DeleteView):
     model = Event
     success_url = reverse_lazy('events')
+
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
-
 
 
 def join_event(request, pk):
@@ -96,29 +106,45 @@ def join_event(request, pk):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
         return context
+
+
+def leave_event(request, pk):
+    request.user.gameplanuser.leave_event(pk)
+    return redirect(reverse_lazy('events'))
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
+        return context
+
 
 class UserProfileView(generic.DetailView):
     """View for the user profile page"""
     model = GameplanUser
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
-        context['friends_list'] = Friendship.objects.filter(friend_user=self.request.user.gameplanuser)
+        context['friends_list'] = Friendship.objects.filter(
+            friend_user=self.request.user.gameplanuser)
         return context
+
 
 class UserProfileUpdateView(generic.UpdateView):
     model = GameplanUser
     form_class = UserProfilePageForm
 
+
 @login_required
 def friendsview(request):
     user_list = GameplanUser.objects.all()
-    friends_list = Friendship.objects.filter(friend_user=request.user.gameplanuser)
+    friends_list = Friendship.objects.filter(
+        friend_user=request.user.gameplanuser)
     existing_friends = [friendship.friend for friendship in friends_list]
     excludefromuser_list = existing_friends + [request.user.gameplanuser]
     context = {'user_list': user_list,
@@ -127,13 +153,15 @@ def friendsview(request):
                'excludefromuser_list': excludefromuser_list}
     return render(request, 'gameplanapp/friends.html', context)
 
+
 def addfriendview(request, pk):
     request.user.gameplanuser.addfriend(pk)
     return(redirect(reverse_lazy('friends')))
 
-def addGalleryPictureView(request,pk):
+
+def addGalleryPictureView(request, pk):
     if request.method == 'POST':
-        form = EventGalleryForm(request.POST,request.FILES)
+        form = EventGalleryForm(request.POST, request.FILES)
         if form.is_valid():
             eventgallery = form.save(commit=False)
             eventgallery.gallery_event = Event.objects.get(pk=pk)
@@ -142,3 +170,33 @@ def addGalleryPictureView(request,pk):
     else:
         form = EventGalleryForm()
     return render(request, 'gameplanapp/addgalleryphoto.html', {'form': form})
+
+
+class CreateMessageView(generic.CreateView):
+    model = Message
+    form_class = MessageForm
+
+    def get_initial(self):
+        sender = self.request.user.gameplanuser
+        return {
+            'sender': sender,
+        }
+
+
+class EventFeedbackView(generic.CreateView):
+    model = Message
+    form_class = EventFeedbackForm
+    def get_initial(self):
+        sender = self.request.user.gameplanuser
+        return {
+            'sender': sender,
+        }
+
+class MessageListView(generic.ListView):
+    context_object_name = "message_list"
+    paginate_by = 10
+    def get_queryset(self):
+        return Message.objects.filter(recipient=self.request.user.gameplanuser)
+
+class MessageDetailView(generic.DetailView):
+    model = Message
