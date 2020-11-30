@@ -72,6 +72,22 @@ class EventListView(generic.ListView):
     model = Event
 
 
+class JoinedEventListView(generic.ListView):
+    """generic event list view"""
+    model = Event
+
+    def get_queryset(self):
+        return self.request.user.gameplanuser.event_attending.all()
+
+
+class ManagingEventListView(generic.ListView):
+    """generic event list view"""
+    model = Event
+
+    def get_queryset(self):
+        return Event.objects.filter(event_manager=self.request.user.gameplanuser)
+
+
 class EventDetailView(generic.DetailView):
     """generic event detail view"""
     model = Event
@@ -183,20 +199,27 @@ class CreateMessageView(generic.CreateView):
         }
 
 
-class EventFeedbackView(generic.CreateView):
-    model = Message
-    form_class = EventFeedbackForm
-    def get_initial(self):
-        sender = self.request.user.gameplanuser
-        return {
-            'sender': sender,
-        }
+def eventFeedBackView(request, pk):
+    if request.method == 'POST':
+        event = Event.objects.get(pk=pk)
+        form = EventFeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(event.get_absolute_url())
+    else:
+        default_text = event.event_title + " event Feedback:"
+        form = EventFeedbackForm(request.POST, initial={
+                         'sender': request.user.gameplanuser, 'recipient': event.event_manager, 'content':default_text})
+    return render(request, 'gameplanapp/message_form.html', {'form': form})
+
 
 class MessageListView(generic.ListView):
     context_object_name = "message_list"
     paginate_by = 10
+
     def get_queryset(self):
         return Message.objects.filter(recipient=self.request.user.gameplanuser)
+
 
 class MessageDetailView(generic.DetailView):
     model = Message
