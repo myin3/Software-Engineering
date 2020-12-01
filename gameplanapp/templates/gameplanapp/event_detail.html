@@ -6,7 +6,7 @@
     <!-- Event Details -->
     <section class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-large">
                     <h3>Title : {{event.event_title}}</h3>
                     <h3>Location: {{event.event_location}}</h3>
                     <h3>Start Date: {{event.event_date}}</h3>
@@ -19,21 +19,22 @@
 
             <div class="row">
                 {% if request.user.pk == event.event_manager.pk %}
-                <div class="col-lg-10 col-sm-10 col-md-10">
-                    <a href="/gameplanapp/event/{{event.id}}/delete" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Cancel Event</button></a>
-                    <a href="/gameplanapp/event/{{event.id}}/update" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Edit</button></a>
-                    <a href="{% url 'events' %}" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Back</button></a>
+                <div class="btn-group">
+                    <a href="/gameplanapp/event/{{event.id}}/delete" class="btn btn-dark" roll="button">Cancel Event</a>
+                    <a href="/gameplanapp/event/{{event.id}}/update" class="btn btn-dark" roll="button">Edit</a>
+                    <a href="{% url 'events' %}"  class="btn btn-dark" roll="button">Back</a>
+                    <a href="/gameplanapp/event/{{event.id}}/send_reminder" class="btn btn-dark" roll="button">Send Reminder</a>
                 </div>
                 {% elif event in attending_list %}
-                <div class="col-lg-10 col-sm-10 col-md-10">
-                    <a href="/gameplanapp/event/{{event.id}}/leave" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Leave Event</button></a>
-                    <a href="{% url 'events' %}" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Back</button></a>
-                    <a href="/gameplanapp/event/{{event.id}}/feedback"><button class="btn btn-dark text-warning" id="backBtn">Provide Feedback</button></a>
+                <div class="btn-group">
+                    <a href="/gameplanapp/event/{{event.id}}/leave" class="btn btn-dark" roll="button">Leave Event</a>
+                    <a href="{% url 'events' %}"  class="btn btn-dark" roll="button">Back</a>
+                    <a href="/gameplanapp/event/{{event.id}}/feedback" class="btn btn-dark" roll="button">Provide Feedback</a>
                 </div>
                 {% else %}
-                <div class="col-lg-10 col-sm-10 col-md-10">
-                    <a href="/gameplanapp/event/{{event.id}}/join" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Join</button></a>
-                    <a href="{% url 'events' %}" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Back</button></a>
+                <div class="btn-group">
+                    <a href="/gameplanapp/event/{{event.id}}/join" class="btn btn-dark" roll="button">Join</a>
+                    <a href="{% url 'events' %}"  class="btn btn-dark" roll="button">Back</a>
                 </div>
                 {% endif %}
             </div>

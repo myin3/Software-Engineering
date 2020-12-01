@@ -86,7 +86,9 @@
                 <li class="active"><a class="active" href="{% url 'events' %}">
                         <h3>Events</h3>
                     </a></li>
-
+                    <li class="active"><a class="active" href="{% url 'contactus' %}">
+                        <h3>About</h3>
+                    </a></li>
             </ul>
             <ul class="nav navbar-toggle navbar-right">
                 {% if request.user.is_authenticated %}

@@ -9,6 +9,8 @@ from gameplanapp.models import Game, Event, GameplanUser, Friendship, EventGalle
 
 # Create your views here.
 
+def contactus(request):
+    return render(request, 'gameplanapp/contact_us.html')
 
 def index(request):
     """ view function for the home page """
@@ -114,7 +116,7 @@ class EventDelete(generic.DeleteView):
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
-
+@login_required
 def join_event(request, pk):
     request.user.gameplanuser.attend_event(pk)
     return redirect(reverse_lazy('events'))
@@ -125,7 +127,7 @@ def join_event(request, pk):
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
         return context
 
-
+@login_required
 def leave_event(request, pk):
     request.user.gameplanuser.leave_event(pk)
     return redirect(reverse_lazy('events'))
@@ -135,6 +137,13 @@ def leave_event(request, pk):
         context = super().get_context_data(**kwargs)
         context['attending_list'] = self.request.user.gameplanuser.event_attending.all()
         return context
+
+@login_required
+def sendReminderView(request, pk):
+    """send a reminder email to everyone attending this event"""
+    event = Event.objects.get(pk=pk)
+    event.send_reminder()
+    return redirect(event.get_absolute_url())
 
 
 class UserProfileView(generic.DetailView):
@@ -201,13 +210,15 @@ class CreateMessageView(generic.CreateView):
 
 def eventFeedBackView(request, pk):
     event = Event.objects.get(pk=pk)
+    default_text = event.event_title + " event Feedback:"
     if request.method == 'POST':
-        form = EventFeedbackForm(request.POST)
+        form = EventFeedbackForm(request.POST, initial={
+            'sender': request.user.gameplanuser, 'recipient': event.event_manager, 'content':default_text})
+
         if form.is_valid():
             form.save()
             return redirect(event.get_absolute_url())
     else:
-        default_text = event.event_title + " event Feedback:"
         form = EventFeedbackForm(request.POST, initial={
                          'sender': request.user.gameplanuser, 'recipient': event.event_manager, 'content':default_text})
     return render(request, 'gameplanapp/message_form.html', {'form': form})

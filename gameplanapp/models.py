@@ -1,8 +1,8 @@
 """models for our gameplan apps"""
-import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
+from django.core.mail import send_mass_mail
 from django.dispatch import receiver
 # Used to generate URLs by reversing the URL patterns
 from django.urls import reverse
@@ -96,6 +96,17 @@ class Event(models.Model):
         returns a url to access a particular event instance
         """
         return reverse('event_detail', args=[str(self.id)])
+
+    def send_reminder(self):
+        """
+        sends reminder email to everyone attending event
+        """
+        message_contents = "This is a reminder that your event: " + self.event_title + " takes place on " + self.event_date + " in " + self.event_location
+        subject = "Event Reminder"
+        attendees = self.gameplanuser_set.all()
+        for attendee in attendees:
+            remindermessage = Message.objects.create(sender=self.event_manager, recipient=attendee, contents=message_contents)
+            remindermessage.save()            
 
 class EventGallery(models.Model):
     """
