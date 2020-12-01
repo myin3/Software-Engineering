@@ -2,10 +2,11 @@
 {% block content %}
 
 <section class="container">
-    <div class="row">
-        <a href="/gameplanapp/events/joined" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Attending</button></a>
-        <a href="/gameplanapp/events/managing" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">Managing</button></a>
-        <a href="{% url 'events' %}" class="text-light"><button class="btn btn-dark text-warning" id="backBtn">All</button></a>
+    <h3>Filter</h3>
+    <div class="btn-group">
+        <a href="/gameplanapp/events/joined" class="btn btn-secondary" roll="button">Attending</a>
+        <a href="/gameplanapp/events/managing" class="btn btn-secondary" roll="button">Managing</a>
+        <a href="{% url 'events' %}" class="btn btn-secondary" roll="button">All</a>
     </div>
 </section>
 <hr>

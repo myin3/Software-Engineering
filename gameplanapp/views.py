@@ -200,8 +200,8 @@ class CreateMessageView(generic.CreateView):
 
 
 def eventFeedBackView(request, pk):
+    event = Event.objects.get(pk=pk)
     if request.method == 'POST':
-        event = Event.objects.get(pk=pk)
         form = EventFeedbackForm(request.POST)
         if form.is_valid():
             form.save()
