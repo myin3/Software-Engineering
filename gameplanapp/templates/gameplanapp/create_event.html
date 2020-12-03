@@ -8,7 +8,6 @@
         </div>
         <div class="col-lg-4">
             {% block form %}
-            <h2>Create Event</h2>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
